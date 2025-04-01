@@ -14,11 +14,35 @@ let totalWins = 0;
 let totalLosses = 0;
 let rounds = 0;
 
+function restrictNumber(input, min, max) {
+    let value = Number(input.value);
+    if (isNaN(value)) value = min;
+    value = Math.min(Math.max(value, min), max);
+    input.value = value;
+    return value;
+}
+
+function setupInputValidation() {
+    const balanceInput = document.getElementById('balance');
+    const betInput = document.getElementById('bet');
+    const winChanceInput = document.getElementById('winChance');
+    const betMultiplierInput = document.getElementById('betMultiplier');
+
+    balanceInput.addEventListener('input', () => restrictNumber(balanceInput, 1, 1000000000000));
+    betInput.addEventListener('input', () => restrictNumber(betInput, 1, 1000000000000));
+    winChanceInput.addEventListener('input', () => restrictNumber(winChanceInput, 0, 100));
+    betMultiplierInput.addEventListener('input', () => restrictNumber(betMultiplierInput, 1, 100));
+}
+
 function initializeSimulation() {
-    startBalance = Number(document.getElementById('balance').value);
+    const balanceInput = document.getElementById('balance');
+    const betInput = document.getElementById('bet');
+    const betMultiplierInput = document.getElementById('betMultiplier');
+
+    startBalance = restrictNumber(balanceInput, 1, 1000000000000);
     currentBalance = startBalance;
-    originalBet = Number(document.getElementById('bet').value);
-    betMultiplier = Number(document.getElementById('betMultiplier').value);
+    originalBet = restrictNumber(betInput, 1, 1000000000000);
+    betMultiplier = restrictNumber(betMultiplierInput, 1, 1000000000000);
     currentBet = originalBet;
     updateStats();
 }
@@ -36,7 +60,8 @@ function updateStats() {
 }
 
 function simulateFlip() {
-    const winChance = Number(document.getElementById('winChance').value);
+    const winChanceInput = document.getElementById('winChance');
+    const winChance = restrictNumber(winChanceInput, 1, 99);
     const random = Math.random() * 100;
     rounds++;
 
@@ -47,7 +72,7 @@ function simulateFlip() {
         currentLoseStreak = 0;
         maxWinStreak = Math.max(maxWinStreak, currentWinStreak);
         totalWins++;
-        currentBet = originalBet; // Reset bet to original after win
+        currentBet = originalBet;
     } else {
         // Loss
         currentBalance -= currentBet;
@@ -55,7 +80,7 @@ function simulateFlip() {
         currentWinStreak = 0;
         maxLoseStreak = Math.max(maxLoseStreak, currentLoseStreak);
         totalLosses++;
-        currentBet *= betMultiplier; // Use custom multiplier instead of fixed 2
+        currentBet *= betMultiplier;
     }
 
     maxBalance = Math.max(maxBalance, currentBalance);
@@ -101,5 +126,5 @@ function resetSimulation() {
 document.getElementById('start').addEventListener('click', startSimulation);
 document.getElementById('stop').addEventListener('click', stopSimulation);
 
-// Initialize on load
+setupInputValidation();
 initializeSimulation();
