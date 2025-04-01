@@ -126,6 +126,54 @@ button:disabled {
     color: #2d3748;
 }
 
+.info-icon {
+    display: inline-block;
+    font-size: 0.8em;
+    color: #4299e1;
+    position: relative;
+    cursor: help;
+    margin-left: 8px;
+    vertical-align: super;
+}
+
+.tooltip {
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 280px;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.2s, visibility 0.2s;
+}
+
+.info-icon:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltip h3 {
+    color: #2d3748;
+    margin: 0 0 12px 0;
+    font-size: 1rem;
+}
+
+.tooltip ul {
+    margin: 0;
+    padding-left: 20px;
+    color: #4a5568;
+    font-size: 0.9rem;
+}
+
+.tooltip li {
+    margin: 6px 0;
+}
+
 @media (max-width: 600px) {
     .container {
         padding: 20px;
@@ -137,5 +185,10 @@ button:disabled {
     
     button {
         padding: 10px 24px;
+    }
+    
+    .tooltip {
+        width: 200px;
+        font-size: 0.8rem;
     }
 }

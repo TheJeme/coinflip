@@ -8,7 +8,20 @@
 </head>
 <body>
     <div class="container">
-        <h1>Coin Flip Simulator</h1>
+        <h1>
+            Coin Flip Simulator
+            <span class="info-icon" id="infoIcon">ⓘ
+                <div class="tooltip">
+                    <h3>How it works:</h3>
+                    <ul>
+                        <li>Each flip has your set win chance percentage</li>
+                        <li>On win: You win your current bet amount and next bet is starting bet</li>
+                        <li>On loss: You lose your bet and next bet is multiplied</li>
+                        <li>Simulation stops when you can't afford next bet</li>
+                    </ul>
+                </div>
+            </span>
+        </h1>
         <div class="settings">
             <div class="input-group">
                 <label for="balance">Starting Balance:</label>
