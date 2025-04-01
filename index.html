@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Flip Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Coin Flip Simulator</h1>
+        <div class="settings">
+            <div class="input-group">
+                <label for="balance">Starting Balance:</label>
+                <input type="number" id="balance" value="1000">
+            </div>
+            <div class="input-group">
+                <label for="bet">Starting Bet:</label>
+                <input type="number" id="bet" value="10">
+            </div>
+            <div class="input-group">
+                <label for="winChance">Win Chance (%):</label>
+                <input type="number" id="winChance" value="50" min="1" max="99">
+            </div>
+        </div>
+        <div class="controls">
+            <button id="start">Start</button>
+            <button id="stop" disabled>Stop</button>
+        </div>
+        <div class="status">
+            <p>Current Balance: <span id="currentBalance">1000</span></p>
+            <p>Current Bet: <span id="currentBet">10</span></p>
+            <p>Rounds: <span id="rounds">0</span></p>
+        </div>
+        <div class="stats" id="stats">
+            <h2>Statistics</h2>
+            <p>Start Balance: <span id="startBalance"></span></p>
+            <p>Max Balance: <span id="maxBalance"></span></p>
+            <p>Max Win Streak: <span id="maxWinStreak"></span></p>
+            <p>Max Lose Streak: <span id="maxLoseStreak"></span></p>
+            <p>Total Wins: <span id="totalWins"></span></p>
+            <p>Total Losses: <span id="totalLosses"></span></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
