@@ -10,6 +10,7 @@ let currentLoseStreak = 0;
 let maxWinStreak = 0;
 let maxLoseStreak = 0;
 let maxBalance = 0;
+let minBalance = 0;
 let totalWins = 0;
 let totalLosses = 0;
 let rounds = 0;
@@ -34,7 +35,7 @@ function setupInputValidation() {
     betMultiplierInput.addEventListener('input', () => restrictNumber(betMultiplierInput, 1, 100));
 }
 
-function initializeSimulation() {
+function initializeSimulation(initialize = false) {
     const balanceInput = document.getElementById('balance');
     const betInput = document.getElementById('bet');
     const betMultiplierInput = document.getElementById('betMultiplier');
@@ -44,7 +45,19 @@ function initializeSimulation() {
     originalBet = restrictNumber(betInput, 1, 1000000000000);
     betMultiplier = restrictNumber(betMultiplierInput, 1, 1000000000000);
     currentBet = originalBet;
-    updateStats();
+    maxBalance = startBalance;
+    minBalance = startBalance;
+    totalWins = 0;
+    totalLosses = 0;
+    rounds = 0;
+    currentWinStreak = 0;
+    currentLoseStreak = 0;
+    maxWinStreak = 0;
+    maxLoseStreak = 0;
+    isRunning = false;
+    if (!initialize) {
+      updateStats();
+    }
 }
 
 function updateStats() {
@@ -53,6 +66,7 @@ function updateStats() {
     document.getElementById('currentBet').textContent = currentBet;
     document.getElementById('rounds').textContent = rounds;
     document.getElementById('maxBalance').textContent = Math.max(maxBalance, currentBalance);
+    document.getElementById('minBalance').textContent = Math.min(minBalance, currentBalance);
     document.getElementById('maxWinStreak').textContent = maxWinStreak;
     document.getElementById('maxLoseStreak').textContent = maxLoseStreak;
     document.getElementById('totalWins').textContent = totalWins;
@@ -84,6 +98,7 @@ function simulateFlip() {
     }
 
     maxBalance = Math.max(maxBalance, currentBalance);
+    minBalance = Math.min(minBalance, currentBalance);
     updateStats();
 
     if (currentBalance <= 0 || currentBet > currentBalance) {
@@ -117,6 +132,7 @@ function resetSimulation() {
     maxWinStreak = 0;
     maxLoseStreak = 0;
     maxBalance = 0;
+    minBalance = 0;
     totalWins = 0;
     totalLosses = 0;
     rounds = 0;
@@ -127,4 +143,4 @@ document.getElementById('start').addEventListener('click', startSimulation);
 document.getElementById('stop').addEventListener('click', stopSimulation);
 
 setupInputValidation();
-initializeSimulation();
+initializeSimulation(true);
