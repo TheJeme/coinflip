@@ -4,6 +4,7 @@ let startBalance;
 let currentBalance;
 let currentBet;
 let originalBet;
+let betMultiplier;
 let currentWinStreak = 0;
 let currentLoseStreak = 0;
 let maxWinStreak = 0;
@@ -17,6 +18,7 @@ function initializeSimulation() {
     startBalance = Number(document.getElementById('balance').value);
     currentBalance = startBalance;
     originalBet = Number(document.getElementById('bet').value);
+    betMultiplier = Number(document.getElementById('betMultiplier').value);
     currentBet = originalBet;
     updateStats();
 }
@@ -53,7 +55,7 @@ function simulateFlip() {
         currentWinStreak = 0;
         maxLoseStreak = Math.max(maxLoseStreak, currentLoseStreak);
         totalLosses++;
-        currentBet *= 2; // Double bet after loss
+        currentBet *= betMultiplier; // Use custom multiplier instead of fixed 2
     }
 
     maxBalance = Math.max(maxBalance, currentBalance);
