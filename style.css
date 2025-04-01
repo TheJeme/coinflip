@@ -98,7 +98,7 @@ button:disabled {
     transform: none;
 }
 
-.status, .stats {
+.status, .live-stats, .stats {
     background: #fff;
     padding: 24px;
     border-radius: 12px;
@@ -106,14 +106,14 @@ button:disabled {
     margin: 20px 0;
 }
 
-.stats h2 {
+.stats h2, .live-stats h2 {
     color: #2d3748;
     margin-top: 0;
     margin-bottom: 20px;
     font-weight: 600;
 }
 
-.status p, .stats p {
+.status p, .live-stats p, .stats p {
     display: flex;
     justify-content: space-between;
     margin: 12px 0;
