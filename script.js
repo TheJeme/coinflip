@@ -65,8 +65,8 @@ function updateStats() {
     document.getElementById('currentBalance').textContent = currentBalance;
     document.getElementById('currentBet').textContent = currentBet;
     document.getElementById('rounds').textContent = rounds;
-    document.getElementById('maxBalance').textContent = Math.max(maxBalance, currentBalance);
-    document.getElementById('minBalance').textContent = Math.min(minBalance, currentBalance);
+    document.getElementById('maxBalance').textContent = maxBalance;
+    document.getElementById('minBalance').textContent = minBalance;
     document.getElementById('maxWinStreak').textContent = maxWinStreak;
     document.getElementById('maxLoseStreak').textContent = maxLoseStreak;
     document.getElementById('totalWins').textContent = totalWins;
@@ -98,7 +98,7 @@ function simulateFlip() {
     }
 
     maxBalance = Math.max(maxBalance, currentBalance);
-    minBalance = Math.min(minBalance, currentBalance);
+    minBalance = rounds === 1 ? currentBalance : Math.min(minBalance, currentBalance);
     updateStats();
 
     if (currentBalance <= 0 || currentBet > currentBalance) {
