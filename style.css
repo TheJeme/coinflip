@@ -168,6 +168,7 @@ button:disabled {
     padding-left: 20px;
     color: #4a5568;
     font-size: 0.9rem;
+    text-align: left;
 }
 
 .tooltip li {
